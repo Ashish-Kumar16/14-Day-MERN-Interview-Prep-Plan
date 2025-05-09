@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Blog Post Example</title>
+        <style>
+    /* Skip to Content link */
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 10px;
+      background: #222;
+      color: #fff;
+      padding: 8px 16px;
+      z-index: 1000;
+      border-radius: 4px;
+      text-decoration: none;
+    }
+    .skip-link:focus {
+      left: 10px;
+    }
+
+    /* Navigation styles */
+    nav {
+      background: #333;
+      color: #fff;
+      padding: 0.5em 1em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1em;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      padding: 0.5em 0.75em;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+    }
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      border-radius: 2px;
+    }
+    @media (max-width: 700px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #333;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* Blog layout */
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2em;
+      margin: 2em auto;
+      max-width: 1000px;
+      padding: 0 1em;
+    }
+    article {
+      flex: 2 1 400px;
+      background: #fafafa;
+      padding: 1.5em;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #0001;
+    }
+    aside {
+      flex: 1 1 200px;
+      background: #f0f0f0;
+      padding: 1em;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #0001;
+      min-width: 180px;
+      max-width: 300px;
+      margin-top: 1em;
+      height: fit-content;
+    }
+    figure {
+      margin: 1em 0;
+      text-align: center;
+    }
+    figcaption {
+      font-size: 0.95em;
+      color: #555;
+      margin-top: 0.5em;
+    }
+    @media (max-width: 900px) {
+      main {
+        flex-direction: column;
+      }
+      aside {
+        margin-top: 0;
+        margin-bottom: 2em;
+      }
+    }
+  </style>
+    </head>
+    <body>
+        <a href="#main-content" class="skip-link">Skip to Content</a>
+        <nav>
+            <div><strong>My Blog</strong></div>
+            <div class="hamburger" tabindex="0"
+                aria-label="Open navigation menu" aria-controls="nav-links"
+                aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Posts</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+        </nav>
+        <main id="main-content">
+            <article>
+                <header>
+                    <h1>Understanding Responsive Web Design</h1>
+                    <p><em>By Jane Doe | May 9, 2025</em></p>
+                </header>
+                <figure>
+                    <picture>
+                        <source srcset="images/blog-desktop.jpg"
+                            media="(min-width: 700px)">
+                        <source srcset="images/blog-mobile.jpg"
+                            media="(max-width: 699px)">
+                        <img src="images/blog-desktop.jpg"
+                            alt="Responsive web design illustration"
+                            style="width:100%;height:auto;">
+                    </picture>
+                    <figcaption>
+                        Responsive images adapt to different screen sizes.
+                    </figcaption>
+                </figure>
+                <section>
+                    <h2>What is Responsive Design?</h2>
+                    <p>
+                        Responsive web design ensures your website looks great
+                        on all devices, from desktops to smartphones.
+                    </p>
+                </section>
+                <section>
+                    <h2>Watch this quick intro:</h2>
+                    <video controls width="100%"
+                        poster="images/video-poster.jpg">
+                        <source src="media/responsive-design.mp4"
+                            type="video/mp4">
+                        <source src="media/responsive-design.webm"
+                            type="video/webm">
+                        <track kind="captions" src="media/captions.vtt"
+                            srclang="en" label="English" default>
+                        Sorry, your browser doesn't support embedded videos.
+                    </video>
+                </section>
+            </article>
+            <aside>
+                <h3>About the Author</h3>
+                <p>Jane Doe is a front-end developer passionate about
+                    accessibility and responsive design.</p>
+                <h4>Related Posts</h4>
+                <ul>
+                    <li><a href="#">CSS Grid vs Flexbox</a></li>
+                    <li><a href="#">Mobile-First Design Tips</a></li>
+                </ul>
+            </aside>
+        </main>
+        <script>
+    // Hamburger menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', !expanded);
+    });
+    hamburger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        hamburger.click();
+      }
+    });
+  </script>
+    </body>
+</html>
