@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Tasks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+
+    /* 1. Card Component */
+    .card {
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 300px;
+      background-color: #fff;
+      margin-bottom: 40px;
+    }
+
+    /* 2. Float Layout */
+    .float-layout {
+      margin-bottom: 40px;
+      overflow: auto;
+    }
+
+    .float-img {
+      float: left;
+      width: 150px;
+      margin-right: 20px;
+    }
+
+    /* Flexbox Layout */
+    .flex-layout {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .flex-img {
+      width: 150px;
+      flex-shrink: 0;
+    }
+
+    /* 3. Two-Column Inline-Block Layout */
+    .column {
+      display: inline-block;
+      width: 48%;
+      vertical-align: top;
+      background: #f0f0f0;
+      padding: 10px;
+      margin: 1%;
+    }
+
+    /* 4. Custom Web Font */
+    @font-face {
+      font-family: 'MyCustomFont';
+      src: url('https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxM.woff2') format('woff2');
+    }
+
+    .custom-font {
+      font-family: 'MyCustomFont', sans-serif;
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    /* 5. CSS-Only Tooltip */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .tooltip::before {
+      content: 'This is a tooltip';
+      position: absolute;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: black;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 4px;
+      opacity: 0;
+      white-space: nowrap;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .tooltip:hover::before {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>1. Card Component</h2>
+  <div class="card">
+    <h3>Card Title</h3>
+    <p>This is a card with padding, border, rounded corners, and shadow.</p>
+  </div>
+
+  <h2>2. Float Layout</h2>
+  <div class="float-layout">
+    <img src="https://via.placeholder.com/150" alt="Float Example" class="float-img">
+    <p>This paragraph wraps around the image using float. The image is floated to the left, and text flows beside it.</p>
+  </div>
+
+  <h3>Refactored with Flexbox</h3>
+  <div class="flex-layout">
+    <img src="https://via.placeholder.com/150" alt="Flex Example" class="flex-img">
+    <p>This layout uses Flexbox instead of float. The image and text are aligned horizontally with spacing.</p>
+  </div>
+
+  <h2>3. Two-Column Inline-Block Layout</h2>
+  <div class="column">Left Column: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+  <div class="column">Right Column: Nulla facilisi. Suspendisse potenti. Aliquam erat volutpat.</div>
+
+  <h2>4. Custom Web Font</h2>
+  <p class="custom-font">This text uses a custom web font (Roboto loaded with @font-face).</p>
+
+  <h2>5. CSS-Only Tooltip</h2>
+  <p>Hover over this <span class="tooltip">tooltip</span> to see the effect using pseudo-elements.</p>
+
+</body>
+</html>
