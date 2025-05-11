@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Grid with Theme Switcher and Carousel</title>
+  <style>
+    /* CSS Variables for Theming */
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #333333;
+      --primary-color: #007bff;
+      --secondary-bg: #f4f4f4;
+      --carousel-bg: #e0e0e0;
+      --button-bg: #007bff;
+      --button-text: #ffffff;
+    }
+
+    /* Dark Theme */
+    [data-theme="dark"] {
+      --bg-color: #1a1a1a;
+      --text-color: #ffffff;
+      --secondary-bg: #2c2c2c;
+      --carousel-bg: #3a3a3a;
+      --button-bg: #1e90ff;
+    }
+
+    /* Respect System Preference */
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg-color: #1a1a1a;
+        --text-color: #ffffff;
+        --secondary-bg: #2c2c2c;
+        --carousel-bg: #3a3a3a;
+        --button-bg: #1e90ff;
+      }
+    }
+
+    /* Theme Toggle Checkbox */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+    }
+
+    /* Base Styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* 12-Column Grid System with Named Areas */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-areas:
+        "header header header header header header header header header header header header"
+        "sidebar main main main main main main main main main main main"
+        "footer footer footer footer footer footer footer footer footer footer footer footer";
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      grid-area: header;
+      background-color: var(--secondary-bg);
+      padding: 20px;
+      text-align: center;
+    }
+
+    aside {
+      grid-area: sidebar;
+      background-color: var(--secondary-bg);
+      padding: 20px;
+    }
+
+    main {
+      grid-area: main;
+      background-color: var(--secondary-bg);
+      padding: 20px;
+    }
+
+    footer {
+      grid-area: footer;
+      background-color: var(--secondary-bg);
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Scrollable Image Carousel with Scroll Snap */
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      background-color: var(--carousel-bg);
+      margin: 20px 0;
+    }
+
+    .carousel img {
+      flex: 0 0 auto;
+      width: 300px;
+      height: 200px;
+      object-fit: cover;
+      scroll-snap-align: start;
+      margin-right: 10px;
+    }
+
+    /* Button with Hover Animation */
+    .animated-button {
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .animated-button:hover {
+      transform: scale(1.1);
+      background-color: #0056b3;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 992px) {
+      .grid-container {
+        grid-template-areas:
+          "header header header header header header header header header header header header"
+          "main main main main main main main main main main main main"
+          "sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar"
+          "footer footer footer footer footer footer footer footer footer footer footer footer";
+      }
+
+      .carousel img {
+        width: 250px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-areas:
+          "header header header header header header"
+          "main main main main main main"
+          "sidebar sidebar sidebar sidebar sidebar sidebar"
+          "footer footer footer footer footer footer";
+      }
+
+      .carousel img {
+        width: 200px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "header"
+          "main"
+          "sidebar"
+          "footer";
+      }
+
+      .carousel img {
+        width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Theme Switcher -->
+  <div class="theme-toggle">
+    <input type="checkbox" id="theme-switcher">
+    <label for="theme-switcher">Toggle Dark/Light Mode</label>
+  </div>
+
+  <!-- Grid Container -->
+  <div class="grid-container">
+    <header>
+      <h1>Responsive Grid System</h1>
+    </header>
+    <aside>
+      <h2>Sidebar</h2>
+      <p>Sidebar content goes here.</p>
+    </aside>
+    <main>
+      <h2>Main Content</h2>
+      <p>This is the main content area.</p>
+      <!-- Carousel -->
+      <div class="carousel">
+        <img src="https://via.placeholder.com/300x200?text=Image+1" alt="Image 1">
+        <img src="https://via.placeholder.com/300x200?text=Image+2" alt="Image 2">
+        <img src="https://via.placeholder.com/300x200?text=Image+3" alt="Image 3">
+        <img src="https://via.placeholder.com/300x200?text=Image+4" alt="Image 4">
+      </div>
+      <button class="animated-button">Hover Me!</button>
+    </main>
+    <footer>
+      <p>Footer content goes here.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme Switcher Logic
+    const themeSwitcher = document.getElementById('theme-switcher');
+    themeSwitcher.addEventListener('change', () => {
+      document.documentElement.setAttribute(
+        'data-theme',
+        themeSwitcher.checked ? 'dark' : 'light'
+      );
+    });
+
+    // Respect System Preference on Load
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeSwitcher.checked = true;
+    }
+  </script>
+</body>
+</html>
